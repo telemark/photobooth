@@ -1,0 +1,43 @@
+import Head from 'next/head'
+
+export default ({ children }) => (
+  <div className='container'>
+    <Head>
+      <meta name='viewport' content='initial-scale=0.8, maximum-scale=0.8, minimum-scale=0.8 user-scalable=no, width=device-width' />
+      <link href='/static/ReactCrop.css' rel='stylesheet' />
+      <script src='https://unpkg.com/react-image-crop/dist/ReactCrop.min.js' />
+    </Head>
+    { children }
+    <style jsx global>
+      {`
+        body {
+          background: #f2f2f2;
+          font-family: Roboto, sans-serif;
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          text-align: center;
+        }
+        h1 {
+          font-weight: 400;
+          font-size: 24px;
+        }
+        .container {
+          display: grid;
+          grid-template-areas:
+            "header header header"
+            ". content ."
+            "footer footer footer";
+          grid-template-columns: 1fr 2fr 1fr;
+          grid-template-rows: auto 1fr auto;
+          min-height: 100vh;
+        }
+        .center {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      `}
+    </style>
+  </div>
+)
