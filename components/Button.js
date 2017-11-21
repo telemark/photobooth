@@ -35,6 +35,9 @@ export default (props) => {
             height: 36px;
             -webkit-box-pack: center;
             margin-right: 5px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
           }
           input:disabled {
             background: #eaeaea;
