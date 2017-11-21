@@ -12,8 +12,8 @@ export default class extends React.Component {
   onImageLoaded = image => {
     this.setState({
       crop: makeAspectCrop({
-        x: 0,
-        y: 0,
+        x: 20,
+        y: 20,
         aspect: 4 / 3,
         width: 50,
       }, image.width / image.height),
@@ -35,9 +35,12 @@ export default class extends React.Component {
         <h1>Fornøyd med bildet?</h1>
         <ReactCrop
           src={this.props.photo}
+          minWidth={20}
+          minHeight={20}
           onChange={this.onChange}
           onImageLoaded={this.onImageLoaded}
           crop={this.state.crop}
+          keepSelection={true}
         />
         <div style={{marginTop: '10px'}} className='center'>
           <Button onClick={this.newImage} value='NYTT BILDE' />
