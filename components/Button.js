@@ -21,19 +21,9 @@ export default (props) => {
             padding: 0 12px;
             font-size: 14px;
             font-weight: 500;
-            align-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
             border: 0;
             cursor: pointer;
-            display: inline-block;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-            flex-direction: row;
             height: 36px;
-            -webkit-box-pack: center;
             margin-right: 5px;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -43,6 +33,9 @@ export default (props) => {
             background: #eaeaea;
             color: #cccccc;
             border-color: white;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
           }
         `}
       </style>
