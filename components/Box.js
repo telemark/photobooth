@@ -8,6 +8,7 @@ export default ({ children }) => (
           width: 400px;
           text-align: center;
           padding-top: 10px;
+          background: white;
         }
       `}
     </style>

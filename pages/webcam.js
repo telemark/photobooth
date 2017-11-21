@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import Main from '../components/Main'
 import Crop from '../components/Crop'
 import Webcam from '../components/Webcam'
+import Header from '../components/Header'
 
 export default class extends React.Component {
   constructor (props) {
@@ -17,6 +18,7 @@ export default class extends React.Component {
   render() {
     return (
       <Layout>
+        <Header/>
         <Main>
         { !this.state.photo
           ? <Webcam setImage={this.setImage} />

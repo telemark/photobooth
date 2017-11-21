@@ -5,6 +5,7 @@ import Crop from '../components/Crop'
 import { isMobile } from 'react-device-detect'
 import DropBox from '../components/DropBox'
 import WebcamBox from '../components/WebcamBox'
+import Header from '../components/Header'
 
 export default class extends React.Component {
   constructor() {
@@ -23,6 +24,7 @@ export default class extends React.Component {
   render() {
     return (
       <Layout>
+        <Header />
         <Main>
           { !this.state.photo
             ? <div className='box-grid'>
