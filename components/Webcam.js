@@ -15,9 +15,6 @@ export default class extends React.Component {
       <div>
         <div>
           <h1>Ta bilde</h1>
-          <p style={{color: '#999', fontSize: '13px'}}>
-            Ta bilde til skolekort
-          </p>
         </div>
         <div>
           <Webcam

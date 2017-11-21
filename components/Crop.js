@@ -12,9 +12,9 @@ export default class extends React.Component {
   onImageLoaded = image => {
     this.setState({
       crop: makeAspectCrop({
-        x: 0,
+        x: 25,
         y: 0,
-        aspect: 4 / 3,
+        aspect: 3 / 5,
         width: 50,
       }, image.width / image.height),
     })
