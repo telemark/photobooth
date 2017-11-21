@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Layout from '../components/Layout'
 import Main from '../components/Main'
 import Dropzone from 'react-dropzone'
@@ -30,6 +31,7 @@ export default class extends React.Component {
               </Dropzone>
             : <Crop setImage={this.setImage} photo={this.state.photo} />
           }
+          <Link href={'/webcam'}><a>Ta bilde med webcamera</a></Link>
           <style jsx global>
             {`
             .dropzone {
