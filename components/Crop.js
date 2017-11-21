@@ -20,9 +20,7 @@ export default class extends React.Component {
     })
   }
 
-  onChange = crop => {
-    this.setState({ crop })
-  }
+  onChange = crop => this.setState({ crop })
 
   saveImage = () => {
     const image = getCroppedImg(this.props.photo, this.state.crop)

@@ -22,6 +22,10 @@ export default ({ children }) => (
           font-weight: 400;
           font-size: 24px;
         }
+        a {
+          text-decoration: none;
+          color: black;
+        }
         .container {
           display: grid;
           grid-template-areas:
@@ -30,13 +34,16 @@ export default ({ children }) => (
             "footer footer footer";
           grid-template-columns: 1fr 2fr 1fr;
           grid-template-rows: auto 1fr auto;
-          min-height: 100vh;
         }
         .center {
           display: flex;
           align-items: center;
           justify-content: center;
         }
+        @media screen and (max-width: 800px) {
+          .container {
+            grid-template-columns: 3% 1fr 3%;
+          }
       `}
     </style>
   </div>
