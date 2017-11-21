@@ -34,7 +34,7 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <h1>Fornøyd med bilde?</h1>
+        <h1>Fornøyd med bildet?</h1>
         <ReactCrop
           src={this.props.photo}
           onChange={this.onChange}
