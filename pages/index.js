@@ -15,7 +15,7 @@ export default class extends React.Component {
 
   onDrop = file => {
     const reader = new FileReader()
-    reader.onload = event => this.setState({ photo: event.target.result, error: false })
+    reader.onload = event => this.setState({ photo: event.target.result })
     reader.readAsDataURL(file[0])
   }
 
@@ -25,7 +25,7 @@ export default class extends React.Component {
         { !this.state.photo
             ? <div className='box-grid'>
                 <WebcamBox display={!isMobile} />
-                <DropBox onDrop={this.onDrop} text={'Dra og slipp bildet over denne boksen'} />
+                <DropBox onDrop={this.onDrop} text='Dra og slipp bildet over denne boksen' />
               </div>
             : <Crop setImage={this.setImage} photo={this.state.photo} />
         }

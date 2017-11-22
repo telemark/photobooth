@@ -10,6 +10,14 @@ export default class extends React.Component {
     this.props.setImage(imageSrc)
   }
 
+  handleKeyDown = event => {
+    if (event.key == 'Enter') this.capture()
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown)
+  }
+
   render() {
     return (
       <div>
