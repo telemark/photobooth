@@ -5,18 +5,11 @@ import Button from '../components/Button'
 export default class extends React.Component {
   setRef = webcam => this.webcam = webcam
 
-  capture = () => {
-    const imageSrc = this.webcam.getScreenshot()
-    this.props.setImage(imageSrc)
-  }
+  capture = () => this.props.setImage(this.webcam.getScreenshot())
 
-  handleKeyDown = event => {
-    if (event.key == 'Enter') this.capture()
-  }
+  handleKeyDown = event => event.key == 'Enter' && this.capture()
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown)
-  }
+  componentDidMount = () => window.addEventListener('keydown', this.handleKeyDown)
 
   render() {
     return (

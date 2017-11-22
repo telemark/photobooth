@@ -5,7 +5,6 @@ export default ({ children }) => (
     <Head>
       <meta name='viewport' content='initial-scale=0.8, maximum-scale=0.8, minimum-scale=0.8 user-scalable=no, width=device-width' />
       <link href='/static/ReactCrop.css' rel='stylesheet' />
-      <script src='https://unpkg.com/react-image-crop/dist/ReactCrop.min.js' />
     </Head>
     { children }
     <style jsx global>

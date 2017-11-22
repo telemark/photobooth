@@ -2,6 +2,7 @@ import React from 'react'
 import Button from './Button'
 import ReactCrop, { makeAspectCrop } from 'react-image-crop'
 import getCroppedImg from '../lib/get-cropped-img'
+import rotateImg from '../lib/rotate-img'
 
 export default class extends React.Component {
   constructor (props) {
@@ -21,6 +22,11 @@ export default class extends React.Component {
   }
 
   onChange = crop => this.setState({ crop })
+
+  rotateImage = () => {
+    const rotatedImg = rotateImg(this.props.photo)
+    this.props.setImage(rotatedImg)
+  }
 
   saveImage = () => {
     const image = getCroppedImg(this.props.photo, this.state.crop)
@@ -42,7 +48,9 @@ export default class extends React.Component {
           crop={this.state.crop}
           keepSelection={true}
         />
+        { this.state.rot && <img src={this.state.rot} /> }
         <div style={{marginTop: '10px'}} className='center'>
+          <Button onClick={this.rotateImage} value='ROTATE' />
           <Button onClick={this.newImage} value='NYTT BILDE' />
           <Button onClick={this.saveImage} value='LAGRE BILDE' />
         </div>
