@@ -23,8 +23,8 @@ export default class extends React.Component {
 
   onChange = crop => this.setState({ crop })
 
-  rotateImage = () => {
-    const rotatedImg = rotateImg(this.props.photo)
+  rotateImage = angle => {
+    const rotatedImg = rotateImg(this.props.photo, angle)
     this.props.setImage(rotatedImg)
   }
 
@@ -48,9 +48,9 @@ export default class extends React.Component {
           crop={this.state.crop}
           keepSelection={true}
         />
-        { this.state.rot && <img src={this.state.rot} /> }
         <div style={{marginTop: '10px'}} className='center'>
-          <Button onClick={this.rotateImage} value='ROTATE' />
+          <Button onClick={() => this.rotateImage(90)} value='ROTER VENSTRE' />
+          <Button onClick={() => this.rotateImage(-90)} value='ROTER HØYRE' />
           <Button onClick={this.newImage} value='NYTT BILDE' />
           <Button onClick={this.saveImage} value='LAGRE BILDE' />
         </div>
