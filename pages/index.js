@@ -25,7 +25,7 @@ export default class extends React.Component {
         { !this.state.photo
             ? <div className='box-grid'>
                 <WebcamBox display={!isMobile} />
-                <DropBox onDrop={this.onDrop} text='Dra og slipp bildet over denne boksen' />
+                <DropBox onDrop={this.onDrop} isMobile={isMobile} />
               </div>
             : <Crop setImage={this.setImage} photo={this.state.photo} />
         }
