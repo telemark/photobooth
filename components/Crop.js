@@ -39,6 +39,10 @@ export default class extends React.Component {
     return (
       <div>
         <h1>Fornøyd med bildet?</h1>
+        <div style={{marginTop: '10px', marginBottom: '10px'}} className='center'>
+          <Button onClick={() => this.rotateImage(90)} value='ROTER VENSTRE' />
+          <Button onClick={() => this.rotateImage(-90)} value='ROTER HØYRE' />
+        </div>
         <ReactCrop
           src={this.props.photo}
           minWidth={20}
@@ -49,8 +53,6 @@ export default class extends React.Component {
           keepSelection={true}
         />
         <div style={{marginTop: '10px'}} className='center'>
-          <Button onClick={() => this.rotateImage(90)} value='ROTER VENSTRE' />
-          <Button onClick={() => this.rotateImage(-90)} value='ROTER HØYRE' />
           <Button onClick={this.newImage} value='NYTT BILDE' />
           <Button onClick={this.saveImage} value='LAGRE BILDE' />
         </div>
