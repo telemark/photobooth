@@ -40,8 +40,8 @@ export default class extends React.Component {
       <div>
         <h1>Fornøyd med bildet?</h1>
         <div style={{marginTop: '10px', marginBottom: '10px'}} className='center'>
-          <Button onClick={() => this.rotateImage(90)} value='ROTER VENSTRE' />
-          <Button onClick={() => this.rotateImage(-90)} value='ROTER HØYRE' />
+          <Button onClick={() => this.rotateImage(-90)} value='ROTER VENSTRE' />
+          <Button onClick={() => this.rotateImage(90)} value='ROTER HØYRE' />
         </div>
         <ReactCrop
           src={this.props.photo}

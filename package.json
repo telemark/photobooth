@@ -53,6 +53,9 @@
   },
   "now": {
     "name": "photobooth",
-    "alias": "fotoboks.tjeneste.win"
+    "alias": "fotoboks.tjeneste.win",
+    "engines": {
+      "node": "8.9.1"
+    }
   }
 }
