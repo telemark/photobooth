@@ -2,9 +2,9 @@ import Layout from './Layout'
 import Header from './Header'
 import Main from './Main'
 
-export default ({ children }) => (
+export default ({ username, children }) => (
   <Layout>
-    <Header />
+    <Header username={username} />
     <Main>
       { children }
     </Main>

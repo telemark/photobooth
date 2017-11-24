@@ -25,20 +25,24 @@
     "coverage": "nyc ava",
     "coveralls": "nyc ava && nyc report --reporter=lcov && cat coverage/lcov.info | coveralls",
     "standard-fix": "standard --fix",
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.1.0",
     "next": "4.1.4",
     "react": "16.1.1",
     "react-device-detect": "0.1.0",
     "react-dom": "16.1.1",
     "react-dropzone": "4.2.3",
     "react-image-crop": "3.0.7",
-    "react-webcam": "0.2.0"
+    "react-webcam": "0.2.0",
+    "session-file-store": "^1.1.2"
   },
   "devDependencies": {
     "ava": "0.23.0",

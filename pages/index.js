@@ -1,11 +1,13 @@
 import React from 'react'
+import session from '../components/session'
 import Page from '../components/Page'
 import Crop from '../components/Crop'
 import { isMobile } from 'react-device-detect'
 import DropBox from '../components/DropBox'
 import WebcamBox from '../components/WebcamBox'
 
-export default class extends React.Component {
+
+const Index = class extends React.Component {
   constructor() {
     super()
     this.state = {}
@@ -21,7 +23,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page>
+      <Page username={this.props.user ? this.props.user.userId : null}>
         { !this.state.photo
             ? <div className='box-grid'>
                 <WebcamBox display={!isMobile} />
@@ -49,3 +51,5 @@ export default class extends React.Component {
     )
   }
 }
+
+export default session(Index)
