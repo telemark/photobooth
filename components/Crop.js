@@ -15,8 +15,8 @@ export default class extends React.Component {
       crop: makeAspectCrop({
         x: 25,
         y: 0,
-        aspect: 3 / 5,
-        width: 50,
+        aspect: 3/4,
+        height: 100
       }, image.width / image.height),
     })
   }
@@ -30,7 +30,7 @@ export default class extends React.Component {
 
   saveImage = () => {
     const image = getCroppedImg(this.props.photo, this.state.crop)
-    console.log(image)
+    this.setState({imageData: image})
   }
 
   newImage = () => this.props.setImage(false)
