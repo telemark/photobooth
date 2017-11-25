@@ -1,6 +1,6 @@
 import React from 'react'
 import Webcam from 'react-webcam'
-import Button from '../components/Button'
+import ImageButton from '../components/ImageButton'
 
 export default class extends React.Component {
   setRef = webcam => this.webcam = webcam
@@ -25,7 +25,7 @@ export default class extends React.Component {
           />
         </div>
         <div className='center'>
-          <Button onClick={this.capture} value='TA BILDE' />
+          <ImageButton onClick={this.capture} src={'/static/camera_alt.png'} />
         </div>
       </div>
     )
