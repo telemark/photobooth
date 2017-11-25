@@ -51,6 +51,7 @@ app.prepare()
       return res.sendStatus(400)
     }
     try {
+      console.log(req.body)
       const file = {name: req.body.name, content: req.body.content}
       const { url } = await upload(STORAGE_TOKEN, file, storageOptions)
       res.send({url: url})
