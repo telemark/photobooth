@@ -16,6 +16,7 @@ const jsonParser = bodyParser.json()
 
 const storageOptions = {
   deploymentName: 'tfk-photobooth',
+  teamId: 'telemark-dev',
   retry: {
     retries: 3
   }

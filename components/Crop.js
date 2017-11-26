@@ -42,7 +42,7 @@ export default class extends React.Component {
   uploadImage = async () => {
     // const image = getCroppedImg(this.props.photo, this.state.crop)
     const image = getImg(this.props.photo, this.state.crop)
-    const { data } = await axios.post(SAVE_URL, {name: 'username.jpg', content: image})
+    const { data } = await axios.post(SAVE_URL, {name: 'username', content: image})
     this.setState({
       uploadUrl: data.url
     })
