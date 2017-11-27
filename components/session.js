@@ -7,6 +7,7 @@ export default Page => class Session extends React.Component {
     const user = req && req.session ? req.session.decodedToken : null
     if (!user && res) {
       res.writeHead(302, { Location: AUTH_URL })
+      res.end()
       return
     }
     return { user }

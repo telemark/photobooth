@@ -1,35 +1,38 @@
 import React from 'react'
 import session from '../components/session'
 import Page from '../components/Page'
-import Crop from '../components/Crop'
+import PhotoEdit from '../components/PhotoEdit'
 import { isMobile } from 'react-device-detect'
 import DropBox from '../components/DropBox'
 import WebcamBox from '../components/WebcamBox'
 
-
 const Index = class extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {}
+    this.setImage = this.setImage.bind(this)
+    this.onDrop = this.onDrop.bind(this)
   }
 
-  setImage = img => this.setState({photo: img})
+  setImage (img) {
+    this.setState({photo: img})
+  }
 
-  onDrop = file => {
-    const reader = new FileReader()
+  onDrop (file) {
+    const reader = new window.FileReader()
     reader.onload = event => this.setState({ photo: event.target.result })
     reader.readAsDataURL(file[0])
   }
 
-  render() {
+  render () {
     return (
       <Page username={this.props.user ? this.props.user.userId : null}>
-        { !this.state.photo
-            ? <div className='box-grid'>
-                <WebcamBox display={!isMobile} />
-                <DropBox onDrop={this.onDrop} isMobile={isMobile}/>
-              </div>
-            : <Crop setImage={this.setImage} photo={this.state.photo} />
+        {!this.state.photo
+         ? <div className='box-grid'>
+           <WebcamBox display={!isMobile} />
+           <DropBox onDrop={this.onDrop} isMobile={isMobile} />
+         </div>
+          : <PhotoEdit setImage={this.setImage} photo={this.state.photo} />
         }
         <style jsx>
           {`

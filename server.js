@@ -1,18 +1,21 @@
-const express = require('express')
-const session = require('express-session')
-const bodyParser = require('body-parser')
-const FileStore = require('session-file-store')(session)
+const micro = require('micro')
+const { send, json } = micro
+const { parse } = require('url')
+const redirect = require('micro-redirect')
+const { JWT_SECRET, SESSION_KEY, STORAGE_TOKEN } = require('./secrets')
+const session = require('micro-cookie-session')({
+  name: 'session',
+  keys: [SESSION_KEY],
+  maxAge: 24 * 60 * 60 * 1000
+})
 const next = require('next')
 const jwt = require('jsonwebtoken')
 const { upload } = require('now-storage')
-
-const { JWT_SECRET, SESSION_KEY, STORAGE_TOKEN } = require('./secrets')
 const { AUTH_URL } = require('./config')
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const jsonParser = bodyParser.json()
 
 const storageOptions = {
   deploymentName: 'tfk-photobooth',
@@ -22,50 +25,36 @@ const storageOptions = {
   }
 }
 
-app.prepare()
-.then(() => {
-  const server = express()
-
-  server.use(session({
-    secret: SESSION_KEY,
-    saveUninitialized: true,
-    store: new FileStore({path: '/tmp/sessions', secret: SESSION_KEY}),
-    resave: false,
-    rolling: true,
-    httpOnly: true,
-    cookie: { maxAge: 604800000 } // week
-  }))
-
-  server.get('/api/login', (req, res) => {
-    const token = req.query.jwt
-    if (!token || !jwt.verify(token, JWT_SECRET)) {
-      res.redirect(AUTH_URL)
-    } else {
-      const { data } = jwt.decode(token)
-      req.session.decodedToken = data
-      res.redirect('/')
-    }
-  })
-
-  server.post('/api/save', jsonParser, async (req, res) => {
-    if (!req.body) {
-      return res.sendStatus(400)
-    }
+const server = micro(async (req, res) => {
+  session(req, res)
+  const { query, pathname } = await parse(req.url, true)
+  const payload = req.method === 'POST' ? await json(req) : query
+  if (pathname.includes('/api/login')) {
+    const token = payload.jwt
     try {
-      const file = {name: req.body.name, content: req.body.content}
-      const { url } = await upload(STORAGE_TOKEN, file, storageOptions)
-      res.send({url: `https://${url}`})
+      const { data: verifiedToken } = jwt.verify(token, JWT_SECRET)
+      req.session.decodedToken = verifiedToken
+      redirect(res, 302, '/')
     } catch (error) {
       console.error(error)
-      res.sendStatus(500)
+      redirect(res, 302, AUTH_URL)
     }
-  })
-
-  server.get('*', (req, res) => {
+  } else if (req.method === 'POST' && pathname.includes('/api/save')) {
+    try {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      const file = { name: payload.name, content: payload.content }
+      const { url } = await upload(STORAGE_TOKEN, file, storageOptions)
+      redirect(res, 302, `https://${url}`)
+    } catch (error) {
+      send(res, 500, error)
+    }
+  } else {
     return handle(req, res)
-  })
+  }
+})
 
-  server.listen(port, (err) => {
+app.prepare().then(() => {
+  server.listen(port, err => {
     if (err) throw err
     console.log(`> Ready on http://localhost:${port}`)
   })

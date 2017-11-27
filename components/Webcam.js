@@ -3,15 +3,30 @@ import Webcam from 'react-webcam'
 import ImageButton from '../components/ImageButton'
 
 export default class extends React.Component {
-  setRef = webcam => this.webcam = webcam
+  constructor (props) {
+    super(props)
+    this.setRef = this.setRef.bind(this)
+    this.capture = this.capture.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+  }
 
-  capture = () => this.props.setImage(this.webcam.getScreenshot())
+  setRef (webcam) {
+    this.webcam = webcam
+  }
 
-  handleKeyDown = event => event.key == 'Enter' && this.capture()
+  capture () {
+    this.props.setImage(this.webcam.getScreenshot())
+  }
 
-  componentDidMount = () => window.addEventListener('keydown', this.handleKeyDown)
+  handleKeyDown (event) {
+    event.key === 'Enter' && this.capture()
+  }
 
-  render() {
+  componentDidMount () {
+    window.addEventListener('keydown', this.handleKeyDown)
+  }
+
+  render () {
     return (
       <div>
         <div>
