@@ -9,7 +9,7 @@ export default ({ username = 'username' }) => (
       </a>
       <span className='right-header'>
         <DropDownMenu name={username}>
-          <a href='#'>Logg ut</a>
+          <a href='/api/logout'>Logg ut</a>
         </DropDownMenu>
       </span>
     </div>

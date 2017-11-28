@@ -1,7 +1,7 @@
 const micro = require('micro')
 const { send, json } = micro
 const { parse } = require('url')
-const redirect = require('micro-redirect')
+const redirect = (res, location, statusCode = 302) => { res.statusCode = statusCode; res.setHeader('Location', location); res.end() }
 const { JWT_SECRET, SESSION_KEY, STORAGE_TOKEN } = require('./secrets')
 const session = require('micro-cookie-session')({
   name: 'session',
@@ -34,20 +34,23 @@ const server = micro(async (req, res) => {
     try {
       const { data: verifiedToken } = jwt.verify(token, JWT_SECRET)
       req.session.decodedToken = verifiedToken
-      redirect(res, 302, '/')
+      redirect(res, '/')
     } catch (error) {
       console.error(error)
-      redirect(res, 302, AUTH_URL)
+      redirect(res, AUTH_URL)
     }
   } else if (req.method === 'POST' && pathname.includes('/api/save')) {
     try {
       res.setHeader('Access-Control-Allow-Origin', '*')
       const file = { name: payload.name, content: payload.content }
       const { url } = await upload(STORAGE_TOKEN, file, storageOptions)
-      redirect(res, 302, `https://${url}`)
+      send(res, 200, { url: `https://${url}` })
     } catch (error) {
       send(res, 500, error)
     }
+  } else if (pathname.includes('/api/logout')) {
+    req.session = null
+    redirect(res, AUTH_URL)
   } else {
     return handle(req, res)
   }
