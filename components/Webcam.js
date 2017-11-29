@@ -1,23 +1,36 @@
 import React from 'react'
 import Webcam from 'react-webcam'
-import Button from '../components/Button'
+import ImageButton from '../components/ImageButton'
 
 export default class extends React.Component {
-  setRef = webcam => this.webcam = webcam
-
-  capture = () => {
-    const imageSrc = this.webcam.getScreenshot()
-    this.props.setImage(imageSrc)
+  constructor (props) {
+    super(props)
+    this.setRef = this.setRef.bind(this)
+    this.capture = this.capture.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
-  render() {
+  setRef (webcam) {
+    this.webcam = webcam
+  }
+
+  capture () {
+    this.props.setImage(this.webcam.getScreenshot())
+  }
+
+  handleKeyDown (event) {
+    event.key === 'Enter' && this.capture()
+  }
+
+  componentDidMount () {
+    window.addEventListener('keydown', this.handleKeyDown)
+  }
+
+  render () {
     return (
       <div>
         <div>
           <h1>Ta bilde</h1>
-          <p style={{color: '#999', fontSize: '13px'}}>
-            Ta bilde til skolekort
-          </p>
         </div>
         <div>
           <Webcam
@@ -27,7 +40,7 @@ export default class extends React.Component {
           />
         </div>
         <div className='center'>
-          <Button onClick={this.capture} value='TA BILDE' />
+          <ImageButton onClick={this.capture} src={'/static/camera_alt.png'} />
         </div>
       </div>
     )

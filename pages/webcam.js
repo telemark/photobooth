@@ -1,29 +1,32 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import Main from '../components/Main'
-import Crop from '../components/Crop'
+import session from '../components/session'
+import Page from '../components/Page'
+import PhotoEdit from '../components/PhotoEdit'
 import Webcam from '../components/Webcam'
 
-export default class extends React.Component {
+const WebcamPage = class extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       photo: false
     }
+    this.setImage = this.setImage.bind(this)
   }
 
-  setImage = img => this.setState({photo: img})
+  setImage (img) {
+    this.setState({photo: img})
+  }
 
-  render() {
+  render () {
     return (
-      <Layout>
-        <Main>
+      <Page username={this.props.user ? this.props.user.userId : null}>
         { !this.state.photo
           ? <Webcam setImage={this.setImage} />
-          : <Crop setImage={this.setImage} photo={this.state.photo} />
+          : <PhotoEdit setImage={this.setImage} photo={this.state.photo} />
         }
-        </Main>
-      </Layout>
+      </Page>
     )
   }
 }
+
+export default session(WebcamPage)

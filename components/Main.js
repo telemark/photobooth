@@ -7,7 +7,6 @@ export default ({ children }) => (
           grid-area: content;
           padding-top: 80px;
           margin: auto;
-          max-width: 700px;
           width: 100%;
           height: 100%;
         }
