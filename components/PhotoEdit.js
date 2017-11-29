@@ -1,8 +1,6 @@
 import React from 'react'
 import ImageButton from './ImageButton'
-import ReactCrop, { makeAspectCrop } from 'react-image-crop'
-// import getCroppedImg from '../lib/get-cropped-img'
-import getImg from '../lib/get-image'
+import Cropper from 'react-cropper'
 import rotateImg from '../lib/rotate-img'
 const axios = require('axios')
 const { SAVE_URL } = require('../config')
@@ -11,27 +9,10 @@ export default class extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
-    this.onImageLoaded = this.onImageLoaded.bind(this)
-    this.onChange = this.onChange.bind(this)
     this.rotateImage = this.rotateImage.bind(this)
     this.saveImage = this.saveImage.bind(this)
     this.uploadImage = this.uploadImage.bind(this)
     this.newImage = this.newImage.bind(this)
-  }
-
-  onImageLoaded (image) {
-    this.setState({
-      crop: makeAspectCrop({
-        x: 25,
-        y: 0,
-        aspect: 3 / 4,
-        height: 100
-      }, image.width / image.height)
-    })
-  }
-
-  onChange (crop) {
-    this.setState({ crop })
   }
 
   rotateImage (angle) {
@@ -40,14 +21,12 @@ export default class extends React.Component {
   }
 
   saveImage () {
-    // const image = getCroppedImg(this.props.photo, this.state.crop)
-    const image = getImg(this.props.photo, this.state.crop)
+    const image = this.refs.cropper.getCroppedCanvas().toDataURL()
     this.props.setImage(image)
   }
 
   async uploadImage () {
-    // const image = getCroppedImg(this.props.photo, this.state.crop)
-    const image = getImg(this.props.photo, this.state.crop)
+    const image = this.refs.cropper.getCroppedCanvas().toDataURL()
     const { data } = await axios.post(SAVE_URL, {name: 'username', content: image})
     this.setState({
       uploadUrl: data.url
@@ -62,12 +41,12 @@ export default class extends React.Component {
     return (
       <div>
         <h1>Fornøyd med bildet?</h1>
-        <ReactCrop
+        <Cropper
           src={this.props.photo}
-          onChange={this.onChange}
-          onImageLoaded={this.onImageLoaded}
-          crop={this.state.crop}
-          keepSelection
+          aspectRatio={3 / 4}
+          guides={false}
+          ref='cropper'
+          crop={this.state.saveImage}
         />
         <div style={{margin: '10px'}} className='center'>
           <ImageButton onClick={() => this.rotateImage(-90)} src='/static/rotate_left.png' />

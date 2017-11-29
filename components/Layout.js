@@ -4,7 +4,7 @@ export default ({ children }) => (
   <div className='container'>
     <Head>
       <meta name='viewport' content='initial-scale=0.8, maximum-scale=0.8, minimum-scale=0.8 user-scalable=no, width=device-width' />
-      <link href='/static/ReactCrop.css' rel='stylesheet' />
+      <link href='/static/cropper.css' rel='stylesheet' />
     </Head>
     { children }
     <style jsx global>
