@@ -27,7 +27,7 @@ export default class extends React.Component {
 
   async uploadImage () {
     const image = this.refs.cropper.getCroppedCanvas().toDataURL()
-    const { data } = await axios.post(SAVE_URL, {name: 'username', content: image})
+    const { data } = await axios.post(SAVE_URL, {name: 'username.png', content: image})
     this.setState({
       uploadUrl: data.url
     })
