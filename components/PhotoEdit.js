@@ -21,8 +21,11 @@ export default class extends React.Component {
   }
 
   saveImage () {
-    const image = this.refs.cropper.getCroppedCanvas().toDataURL()
-    this.props.setImage(image)
+    const imageSrc = this.refs.cropper.getCroppedCanvas().toDataURL()
+    let link = document.createElement('a')
+    link.href = imageSrc
+    link.download = 'username.png'
+    link.click()
   }
 
   async uploadImage () {
@@ -40,7 +43,7 @@ export default class extends React.Component {
   render () {
     return (
       <div>
-        <h1>Fornøyd med bildet?</h1>
+        <h1>Velg utsnitt</h1>
         <Cropper
           src={this.props.photo}
           aspectRatio={3 / 4}

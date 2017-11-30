@@ -42,8 +42,8 @@ const server = micro(async (req, res) => {
   } else if (req.method === 'POST' && pathname.includes('/api/save')) {
     try {
       res.setHeader('Access-Control-Allow-Origin', '*')
-      const reg = /^data:image\/(\w+);base64,([\s\S]+)/;
-      const match = payload.content.match(reg);
+      const reg = /^data:image\/(\w+);base64,([\s\S]+)/
+      const match = payload.content.match(reg)
       const image = Buffer.from(match[2], 'base64')
       const file = { name: payload.name, content: image }
       const { url } = await upload(STORAGE_TOKEN, file, storageOptions)

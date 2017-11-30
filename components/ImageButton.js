@@ -20,6 +20,12 @@ export default (props) => {
             cursor: pointer;
             margin-right: 5px;
           }
+          input:focus {
+            outline:0;
+          }
+          button:active {
+            outline: 0;
+          }
         `}
       </style>
     </div>
