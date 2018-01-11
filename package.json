@@ -36,7 +36,7 @@
     "jsonwebtoken": "8.1.0",
     "micro": "9.1.0",
     "micro-cookie-session": "2.0.0-beta.1",
-    "next": "4.2.1",
+    "next": "4.3.0-universal-alpha.3",
     "now-storage": "1.1.0",
     "react": "16.1.1",
     "react-cropper": "1.0.1",
