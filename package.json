@@ -43,7 +43,7 @@
     "react-device-detect": "1.0.1",
     "react-dom": "16.3.1",
     "react-dropzone": "4.2.9",
-    "react-webcam": "0.2.0"
+    "react-webcam": "0.4.1"
   },
   "devDependencies": {
     "ava": "0.25.0",
