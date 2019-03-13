@@ -43,7 +43,7 @@
     "react-cropper": "1.2.0",
     "react-device-detect": "1.6.2",
     "react-dom": "16.8.4",
-    "react-dropzone": "10.0.0",
+    "react-dropzone": "10.0.2",
     "react-webcam": "1.1.1"
   },
   "devDependencies": {
